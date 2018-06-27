@@ -12,7 +12,7 @@ This appplication is built off ReactJS with SCSS Styling.
 
 ### Screenshots of Application
 ![alt text](https://raw.githubusercontent.com/HolSeo/menu-choosing-app/master/public/images/figure_one.png)
-![alt text](https://raw.githubusercontent.com/HolSeo/menu-choosing-appmaster/public/images/figure_two.png)
+![alt text](https://raw.githubusercontent.com/HolSeo/menu-choosing-app/master/public/images/figure_two.png)
 
 #### Improvements to be made
 - Deployment on Heroku

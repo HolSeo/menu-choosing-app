@@ -8,12 +8,13 @@ import { AddOption } from './AddOption'
 class IndecisionApp extends React.Component {
     constructor(props) {
         super(props)
+        this.handleDeleteOption = this.handleDeleteOption.bind(this)
         this.handleClick = this.handleClick.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleRemove = this.handleRemove.bind(this)
         this.handleClearOption = this.handleClearOption.bind(this)
         this.state = {
-            options: ['a', 'b', 'c'],
+            options: [],
             selectedOption: undefined
         }
     }
@@ -33,22 +34,25 @@ class IndecisionApp extends React.Component {
         const option = this.state.options[index]
         this.setState(() => ({ selectedOption: option }))
     }
+    handleDeleteOption = (optionToRemove) => {
+        this.setState((prevState) => ({
+            options: prevState.options.filter((option) => option !== optionToRemove)
+        }
+        ))
+    }
     handleClearOption() {
         this.setState(() => ({ selectedOption: undefined }))
     }
     handleSubmit(option) {
-        try {
-            if (!option) {
-                return 'Please enter a menu'
-            } else if (this.state.options.indexOf(option) > -1) {
-                return 'This menu already exists.'
-            }
-
-            this.setState((prevState) => ({ options: prevState.options.concat(option) }))
-        } catch (e) {
-
+        if (!option) {
+            return 'Please enter a menu'
+        } else if (this.state.options.indexOf(option) > -1) {
+            return 'This menu already exists.'
         }
 
+        this.setState((prevState) => (
+            { options: prevState.options.concat(option) }
+        ))
     }
     handleRemove() {
         this.setState(() => ({ options: [] }))
@@ -58,12 +62,20 @@ class IndecisionApp extends React.Component {
         return (
             <div>
                 <Header subtitle={subtitle} />
-                <Action handleClick={this.handleClick} />
-                <Options
-                    handleRemove={this.handleRemove}
-                    options={this.state.options}
-                />
-                <AddOption handleSubmit={this.handleSubmit} />
+                <div className="container">
+                    <Action
+                        hasOptions={this.state.options.length > 0}
+                        handleClick={this.handleClick}
+                    />
+                    <div className="widget">
+                        <Options
+                            handleRemove={this.handleRemove}
+                            handleDeleteOption={this.handleDeleteOption}
+                            options={this.state.options}
+                        />
+                        <AddOption handleSubmit={this.handleSubmit} />
+                    </div>
+                </div>
                 <OptionModal 
                     selectedOption={this.state.selectedOption}
                     handleClearOption={this.handleClearOption}

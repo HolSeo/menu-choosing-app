@@ -27,5 +27,7 @@
   },
   "devDependencies": {
     "webpack-cli": "^3.0.8"
-  }
+  },
+  "repository": "https://github.com/HolSeo/menu-choosing-app.git",
+  "author": "HolSeo <dseo1004@gmail.com>"
 }
